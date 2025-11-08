@@ -172,7 +172,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 - **Author**: Shantosh Durai
 - **GitHub**: [@shantoshdurai](https://github.com/shantoshdurai)
-- **Email**: your.email@example.com
+- **Email**: santoshp123steam@gmail.com
+  
 
 ## 🙏 Acknowledgments
 
