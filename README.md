@@ -31,17 +31,6 @@ This project implements a **Convolutional Neural Network (CNN)** using transfer 
 
 ## 🚀 Quick Start
 
-### Prerequisites
-```bash
-python >= 3.8
-tensorflow >= 2.0
-keras >= 2.0
-numpy
-pandas
-matplotlib
-pillow
-```
-
 ### Installation
 
 1. **Clone the repository**
@@ -53,21 +42,6 @@ cd flower-species-classifier
 2. **Install dependencies**
 ```bash
 pip install -r requirements.txt
-```
-
-3. **Download and organize training data**
-```
-folder_data/
-├── Bougainvillea/
-├── Daisies/
-├── Garden_Roses/
-├── Gardenias/
-├── Hibiscus/
-├── Hydrangeas/
-├── Lilies/
-├── Orchids/
-├── Peonies/
-└── Tulips/
 ```
 
 ## 📚 Usage
