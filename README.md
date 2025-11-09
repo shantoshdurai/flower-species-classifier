@@ -71,8 +71,7 @@ flower-species-classifier/
 ├── train.py                      # Training script
 ├── predict.py                    # Prediction script
 ├── requirements.txt              # Project dependencies
-├── my_flower_cnn.h5             # Trained model
-├── flower_class_names.json       # Class labels
+├── my_flower_cnn.h5             # Trained model      
 └── README.md                     # This file
 ```
 
