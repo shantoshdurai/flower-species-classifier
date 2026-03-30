@@ -2,7 +2,6 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 import tensorflow as tf
-import os
 
 # Page Config
 st.set_page_config(
@@ -117,14 +116,7 @@ EMOJIS = {
 
 @st.cache_resource(show_spinner=False)
 def load_model():
-    import traceback
-    try:
-        return tf.keras.models.load_model('my_flower_cnn.h5', compile=False)
-    except Exception as e:
-        with open('/tmp/model_error.txt', 'w') as f:
-            f.write(str(e) + '\n')
-            traceback.print_exc(file=f)
-        return None
+    return tf.keras.models.load_model('my_flower_cnn.h5', compile=False)
 
 # ── Header ──────────────────────────────────────────────────────────────────
 st.markdown("""
@@ -143,13 +135,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 model = load_model()
-if model is None:
-    err = "Unknown error"
-    if os.path.exists('/tmp/model_error.txt'):
-        with open('/tmp/model_error.txt') as f:
-            err = f.read()
-    st.error(f"❌ Could not load model:\n```\n{err}\n```")
-    st.stop()
 
 uploaded_file = st.file_uploader("Upload a flower image", type=["jpg", "jpeg", "png", "webp"], label_visibility="collapsed")
 
@@ -195,7 +180,7 @@ else:
 
     with col_img:
         st.markdown('<div class="sec">Image</div>', unsafe_allow_html=True)
-        st.image(img_bytes, use_container_width=True)
+        st.image(np.array(img), use_container_width=True)
 
     with col_pred:
         st.markdown('<div class="sec">Predictions</div>', unsafe_allow_html=True)
