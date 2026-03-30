@@ -8,13 +8,14 @@ RUN apt-get update && apt-get install -y \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
+# Copy requirements and install
 COPY requirements.txt .
-
-# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy model and app
+# Download model from HF at build time (avoids LFS pointer issues)
+RUN python -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='Santoshp123/flower-species-classifier', filename='my_flower_cnn.h5', local_dir='.')"
+
+# Copy app files
 COPY . .
 
 # Expose Streamlit port
