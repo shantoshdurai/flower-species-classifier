@@ -125,8 +125,11 @@ EMOJIS = {
 
 @st.cache_resource(show_spinner=False)
 def load_model():
-    try: return tf.keras.models.load_model('my_flower_cnn.h5')
-    except: return None
+    try:
+        return tf.keras.models.load_model('my_flower_cnn.h5')
+    except Exception as e:
+        st.session_state['model_error'] = str(e)
+        return None
 
 # ── Header ──────────────────────────────────────────────────────────────────
 st.markdown("""
@@ -146,7 +149,8 @@ st.markdown("""
 
 model = load_model()
 if model is None:
-    st.error("❌ Could not load model. Make sure `my_flower_cnn.h5` is in this folder.")
+    err = st.session_state.get('model_error', 'Unknown error')
+    st.error(f"❌ Could not load model: {err}")
     st.stop()
 
 uploaded_file = st.file_uploader("Upload a flower image", type=["jpg", "jpeg", "png", "webp"], label_visibility="collapsed")
