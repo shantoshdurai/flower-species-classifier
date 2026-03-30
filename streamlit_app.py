@@ -13,13 +13,13 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Auto-download model from Hugging Face if on deployment
+# Download model from HF hub if missing or if file is just an LFS pointer (< 1MB)
 try:
     from huggingface_hub import hf_hub_download
-    if not os.path.exists("my_flower_cnn.h5"):
+    if not os.path.exists("my_flower_cnn.h5") or os.path.getsize("my_flower_cnn.h5") < 1_000_000:
         hf_hub_download(repo_id="Santoshp123/flower-species-classifier", filename="my_flower_cnn.h5", local_dir=".")
-except:
-    pass
+except Exception as e:
+    print(f"HF download error: {e}", flush=True)
 
 st.markdown("""
 <style>
