@@ -168,9 +168,9 @@ if uploaded_file is None:
 
 else:
     # ── Run inference ─────────────────────────────────────────────────────────
-    img = Image.open(uploaded_file).convert('RGB')
+    img_bytes = uploaded_file.read()
+    img = Image.open(__import__('io').BytesIO(img_bytes)).convert('RGB')
     img_arr = np.expand_dims(np.array(img.resize((224, 224))), axis=0).astype('float32')
-
 
     with st.spinner("Classifying..."):
         preds = model.predict(img_arr, verbose=0)[0]
@@ -195,7 +195,7 @@ else:
 
     with col_img:
         st.markdown('<div class="sec">Image</div>', unsafe_allow_html=True)
-        st.image(img, use_container_width=True)
+        st.image(img_bytes, use_container_width=True)
 
     with col_pred:
         st.markdown('<div class="sec">Predictions</div>', unsafe_allow_html=True)
