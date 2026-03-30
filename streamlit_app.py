@@ -118,12 +118,13 @@ EMOJIS = {
 
 @st.cache_resource(show_spinner=False)
 def load_model():
-    import traceback, sys
+    import traceback
     try:
         return tf.keras.models.load_model('my_flower_cnn.h5', compile=False)
     except Exception as e:
-        print(f"MODEL LOAD ERROR: {e}", file=sys.stderr)
-        traceback.print_exc(file=sys.stderr)
+        with open('/tmp/model_error.txt', 'w') as f:
+            f.write(str(e) + '\n')
+            traceback.print_exc(file=f)
         return None
 
 # ── Header ──────────────────────────────────────────────────────────────────
@@ -144,8 +145,11 @@ st.markdown("""
 
 model = load_model()
 if model is None:
-    err = st.session_state.get('model_error', 'Unknown error')
-    st.error(f"❌ Could not load model: {err}")
+    err = "Unknown error"
+    if os.path.exists('/tmp/model_error.txt'):
+        with open('/tmp/model_error.txt') as f:
+            err = f.read()
+    st.error(f"❌ Could not load model:\n```\n{err}\n```")
     st.stop()
 
 uploaded_file = st.file_uploader("Upload a flower image", type=["jpg", "jpeg", "png", "webp"], label_visibility="collapsed")
