@@ -10,13 +10,12 @@ pinned: false
 
 # Flower Species Classifier 🌸
 
-[![Live Demo](https://img.shields.io/badge/🤗%20Hugging%20Face-Live%20Demo-FFD600?style=flat)](https://huggingface.co/spaces/shantoshdurai/flower-species-classifier)
+[![Live Demo](https://img.shields.io/badge/🤗%20Hugging%20Face-Live%20Demo-FFD600?style=flat)](https://santoshp123-flower-species-classifiers.hf.space)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.0+-orange.svg)](https://tensorflow.org)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.16+-orange.svg)](https://tensorflow.org)
 
-A deep learning-based image classification model to identify flower species using **MobileNetV2 transfer learning**. This project demonstrates practical machine learning techniques including data preprocessing, CNN model training,
- and real-time image prediction.
+A deep learning-based image classification model to identify flower species using **MobileNetV2 transfer learning**. Upload a photo and instantly get the flower species with confidence scores. Deployed as an interactive web app using Streamlit and Docker.
 
 ## 📋 Project Overview
 
@@ -27,6 +26,22 @@ This project implements a **Convolutional Neural Network (CNN)** using transfer 
 - **Training Data**: 587 images (80%)
 - **Validation Data**: 146 images (20%)
 - **Total Classes**: 10 flower species
+
+## 🎬 Live Demo
+
+**Try it now**: [🌸 Flower Species Classifier](https://santoshp123-flower-species-classifiers.hf.space)
+
+Upload any flower photo and get instant classification with confidence scores!
+
+### Demo Screenshots
+
+**Idle State:**
+![App Interface](images/app-idle.png)
+
+**With Prediction:**
+![App with Prediction](images/app-prediction.png)
+
+---
 
 ## 🌺 Supported Flower Species
 
@@ -58,32 +73,34 @@ pip install -r requirements.txt
 
 ## 📚 Usage
 
-### Training the Model
+### Run the Web App Locally
 
-```python
-from train import train_model
-
-train_model(epochs=10, batch_size=32)
+```bash
+streamlit run streamlit_app.py
 ```
 
-### Making Predictions
+The app will open at `http://localhost:8501`
 
-```python
-from predict import predict_flower_species
+### Run with Docker
 
-species, confidence = predict_flower_species('path_to_flower_image.jpg')
-print(f"Predicted Species: {species}")
-print(f"Confidence: {confidence:.2f}%")
+```bash
+docker build -t flower-classifier .
+docker run -p 7860:7860 flower-classifier
 ```
+
+Visit `http://localhost:7860` in your browser.
 
 ## 🏗️ Project Structure
 
 ```
 flower-species-classifier/
-├── train.py                      # Training script
-├── predict.py                    # Prediction script
-├── requirements.txt              # Project dependencies
-├── my_flower_cnn.h5             # Trained model      
+├── streamlit_app.py              # Interactive web app (Streamlit)
+├── Dockerfile                    # Docker containerization
+├── requirements.txt              # Python dependencies
+├── my_flower_cnn.h5             # Trained MobileNetV2 model (24MB)
+├── images/                       # Demo screenshots
+│   ├── app-idle.png
+│   └── app-prediction.png
 └── README.md                     # This file
 ```
 
@@ -91,9 +108,11 @@ flower-species-classifier/
 
 - **TensorFlow/Keras**: Deep learning framework
 - **MobileNetV2**: Pre-trained CNN architecture for transfer learning
+- **Streamlit**: Interactive web application framework
+- **Docker**: Containerization for reliable deployment
+- **Hugging Face Spaces**: Cloud hosting platform
 - **NumPy**: Numerical computations
 - **Pillow**: Image processing
-- **Matplotlib**: Visualization
 
 ## 📖 How It Works
 
@@ -121,7 +140,7 @@ Dense(10, activation='softmax') → Output (10 flower classes)
 - **Training Accuracy**: 95%+
 - **Validation Accuracy**: 90%+
 - **Inference Time**: <200ms per image (CPU)
-- **Model Size**: ~11 MB
+- **Model Size**: ~24 MB
 
 ## 🎓 Learning Outcomes
 
@@ -133,17 +152,19 @@ This project covers:
 - ✅ CNN model training and evaluation
 - ✅ Image prediction and inference
 - ✅ Model serialization (saving/loading)
-- ✅ Professional GitHub repository structure
+- ✅ Streamlit web application development
+- ✅ Docker containerization
+- ✅ Cloud deployment (Hugging Face Spaces)
 
 ## 🔮 Future Improvements
 
-- [ ] Add web interface using Flask/Streamlit
-- [ ] Deploy model as REST API
+- [ ] Add more flower species to training data
 - [ ] Implement data augmentation for better generalization
-- [ ] Add more flower species
 - [ ] Mobile app deployment (TensorFlow Lite)
 - [ ] Real-time camera prediction
 - [ ] Advanced performance metrics and confusion matrix
+- [ ] Batch processing for multiple images
+- [ ] API endpoint for programmatic access
 
 ## 📝 License
 
@@ -158,13 +179,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - **Author**: Shantosh Durai
 - **GitHub**: [@shantoshdurai](https://github.com/shantoshdurai)
 - **Email**: santoshp123steam@gmail.com
-  
 
 ## 🙏 Acknowledgments
 
 - TensorFlow/Keras for the amazing deep learning framework
 - MobileNetV2 authors for the efficient architecture
 - Kaggle for the flower dataset
+- Hugging Face for Spaces hosting
 
 ---
 
