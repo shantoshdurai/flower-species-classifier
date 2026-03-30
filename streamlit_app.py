@@ -125,10 +125,12 @@ EMOJIS = {
 
 @st.cache_resource(show_spinner=False)
 def load_model():
+    import traceback, sys
     try:
-        return tf.keras.models.load_model('my_flower_cnn.h5')
+        return tf.keras.models.load_model('my_flower_cnn.h5', compile=False)
     except Exception as e:
-        st.session_state['model_error'] = str(e)
+        print(f"MODEL LOAD ERROR: {e}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         return None
 
 # ── Header ──────────────────────────────────────────────────────────────────
