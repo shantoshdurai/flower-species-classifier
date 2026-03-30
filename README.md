@@ -21,7 +21,7 @@ A deep learning model that identifies flower species from photos using **MobileN
 
 | Idle State | With Prediction |
 |---|---|
-| ![App Interface](images/app-idle.png) | ![Prediction Result](images/app-prediction.png) |
+| ![App Interface](images/image.png) | ![Prediction Result](images/image%20result.png) |
 
 ## ✨ Features
 
